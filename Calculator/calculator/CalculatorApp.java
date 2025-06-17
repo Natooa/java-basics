@@ -58,10 +58,17 @@ public class CalculatorApp {
             }
             default -> {
                 System.out.println("invalid operation");
-                result = calc(a, b, operation);
+                return calc(a, b, getOperation());
+//                char operation1 = getOperation();
+//                result = calc(a, b, operation1);
             }
         }
+        logOperation(a, b, operation, result);
         return result;
+    }
+
+    public static void logOperation(int a, int b, char operation, int result) {
+        System.out.println("[LOG] " + a + " " + operation + " " + b + " = " + result);
     }
 
     public static void start() {
