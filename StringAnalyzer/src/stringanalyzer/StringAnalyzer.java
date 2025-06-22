@@ -7,4 +7,6 @@ public interface StringAnalyzer {
 
     public int calculateVowelAndConsonants(String text);
 
+    public String parseEmail(String text);
+
 }

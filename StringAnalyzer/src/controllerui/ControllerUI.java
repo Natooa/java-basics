@@ -14,7 +14,8 @@ public class ControllerUI {
             System.out.println("1. How many words in your text. " +
                     "\n2. How many symbols in your text. " +
                     "\n3. How many vowels and consonants in your text. " +
-                    "\n4. Exit.");
+                    "\n4. ParseEmail." +
+                    "\n5. Exit.");
             int choice = scanner.nextInt();
             scanner.nextLine();
             switch (choice) {
@@ -31,8 +32,15 @@ public class ControllerUI {
                     stringAnalyzer.calculateVowelAndConsonants(scanner.nextLine());
                 }
                 case 4 -> {
+                    System.out.println("Put your text: ");
+                    stringAnalyzer.parseEmail(scanner.nextLine());
+                }
+                case 5 -> {
                     System.out.println("Thank you for using our StringAnalyzer !\nBye!");
                     return;
+                }
+                default -> {
+                    System.out.println("Invalid choice. Try again.");
                 }
             }
         }

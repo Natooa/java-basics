@@ -47,4 +47,37 @@ public class StringAnalyzerImpl implements StringAnalyzer {
         System.out.println("Consonants: " + consonants_count);
         return vowels_count + consonants_count;
     }
+
+    //parseEmail
+    @Override
+    public String parseEmail(String text) {
+        char c1, c2;
+        int flag = 0;
+        StringBuilder email = new StringBuilder();
+        StringBuilder name = new StringBuilder();
+        for(int i = 0; i < text.length(); i++) {
+            c1 = text.charAt(i);
+            if(c1 == '@') {
+                name.append(text.substring(flag, i));
+                flag = i + 1;
+                for(int j = i + 1; j < text.length(); j++) {
+                    c2 = text.charAt(j);
+                    if(c2 == '.') {
+                        email.append(text.substring(flag, j));
+                        flag = j + 1;
+                        System.out.println("Email: " + email.toString() + " name: " + name.toString());
+                        email.delete(0, email.length());
+                        name.delete(0, name.length());
+                        int nextStart = j + 1;
+                        while(nextStart < text.length() && text.charAt(nextStart) != ' ') {
+                            nextStart++;
+                        }
+                        flag = nextStart + 1;
+                        break;
+                    }
+                }
+            }
+        }
+        return text;
+    }
 }
