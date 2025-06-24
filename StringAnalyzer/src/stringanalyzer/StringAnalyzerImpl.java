@@ -8,15 +8,27 @@ public class StringAnalyzerImpl implements StringAnalyzer {
 
     @Override
     public int calculateWords(String text) {
-        String[] words = text.trim().split("\\s+");
-        int words_count = 0;
-        for(String word : words) {
-            if(!word.matches("\\d+")) {
-                words_count++;
+        int count = 0;
+
+        for(int i = 0; i < text.length(); i++) {
+            if(text.charAt(i) == ' ') {
+                count++;
             }
         }
-        System.out.println("Number of words: " + words_count);
-        return words_count;
+        count++;
+        System.out.println(count);
+        return count;
+
+
+//        String[] words = text.trim().split("\\s+");
+//        int words_count = 0;
+//        for(String word : words) {
+//            if(!word.matches("\\d+")) {
+//                words_count++;
+//            }
+//        }
+//        System.out.println("Number of words: " + words_count);
+//        return words_count;
     }
 
     @Override
