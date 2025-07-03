@@ -1,5 +1,7 @@
 package org.dayonetotwo.studentmanagerapp;
 
+import java.util.Objects;
+
 public class Student {
     private String name;
     private int age;
@@ -38,7 +40,4 @@ public class Student {
     public String toString() {
         return "Name: " + name + "\nAge: " + age + "\ngender: " +  gender + "\nid: " + id;
     }
-
-
-
 }

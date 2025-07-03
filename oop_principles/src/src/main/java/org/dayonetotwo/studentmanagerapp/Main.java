@@ -14,5 +14,8 @@ public class Main {
         Enrollment enrollment2 = new Enrollment(student2, courseOfStudent2);
         System.out.println(enrollment2.toString());
 
+        System.out.println();
+
+        System.out.println(Enrollment.getAllEnrollments());
     }
 }
