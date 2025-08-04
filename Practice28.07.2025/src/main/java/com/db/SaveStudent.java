@@ -3,10 +3,13 @@ package com.db;
 import com.studentmanager.Student;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class SaveStudent {
-    private final ArrayList<Student> students = new ArrayList<>();
+//    private final ArrayList<Student> students = new ArrayList<>();
+    private final Map<Integer, Student> students = new HashMap<>();
     private final Scanner scanner = new Scanner(System.in);
 
     public void addStudent() {
@@ -23,7 +26,7 @@ public class SaveStudent {
 
         try {
             Student student = new Student(name, age, course);
-            students.add(student);
+            students.put(student.getID(), student);
             System.out.println("Student added successfully!");
             System.out.println("ID of Student: " + student.getID() + " Name of student: " + student.getName() + " Age of student: " + student.getAge() + " Course of student: " + student.getCourse());
         } catch (IllegalArgumentException e){
@@ -36,12 +39,12 @@ public class SaveStudent {
             System.out.println("Student list is empty!");
             throw new IllegalArgumentException("Student list is empty!");
         }
-        for (Student student : students) {
-            if (student.getID() == ID) {
-                return student;
-            }
+        if(students.containsKey(ID)) {
+            return students.get(ID);
+        } else {
+            System.out.println("Student with ID " + ID + " not found!");
+            return null;
         }
-        return null;
 //        boolean found = false;
 //        for (Student student : students) {
 //            if (student.getID() == ID) {
@@ -70,8 +73,8 @@ public class SaveStudent {
         if(students.isEmpty()) {
             throw new IllegalArgumentException("Student list is empty!");
         } else {
-            for(Student student : students) {
-                System.out.println(student.toString());
+            for(Map.Entry<Integer, Student> entry : students.entrySet()) {
+                System.out.println(entry.getKey() + ": " + entry.getValue().toString());
             }
         }
     }
@@ -79,7 +82,7 @@ public class SaveStudent {
     public void deleteStudentByID(int ID) {
         Student found = searchStudentByID(ID);
         if(found != null) {
-            students.remove(found);
+            students.remove(ID);
         } else {
             throw new IllegalArgumentException("Student with ID " + ID + " not found");
         }
