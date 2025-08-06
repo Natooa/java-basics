@@ -1,40 +1,35 @@
-package collections.map;
+package collections.map.linkedhashmap;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.management.MBeanAttributeInfo;
+import java.util.LinkedHashMap;
 import java.util.Objects;
 
-public class HashCodeEx1 {
+public class LinkedHashMapEx1 {
     public static void main(String[] args) {
-        Map<Student, Double> map = new HashMap<>();
+        LinkedHashMap<Double, Student> linkedHashMap = new LinkedHashMap<>(16, 0.75f, true);
+
         Student st1 = new Student("Zaur", "Tregulov", 3);
         Student st2 = new Student("Nurdiyar", "Seitnurov", 3);
         Student st3 = new Student("Zhasmin", "Makulbekova", 2);
-        map.put(st1, 7.5);
-        map.put(st2, 8.7);
-        map.put(st3, 9.2);
-        System.out.println(map);
+        Student st4 = new Student("Igor", "Tregulov", 3);
 
-        Student st4 = new Student("Zaur", "Tregulov", 3);
-//        boolean result = map.containsKey(st4);
-//        System.out.println("Result: " + result);
-//        System.out.println(st1.equals(st4));
+        linkedHashMap.put(7.2, st3);
+        linkedHashMap.put(7.5, st4);
+        linkedHashMap.put(5.8, st1);
+        linkedHashMap.put(6.4, st2);
+        System.out.println(linkedHashMap);
 
-        Student st5 = new Student("Igor", "Sidorov", 4);
+        System.out.println(linkedHashMap.get(6.4));
+        System.out.println(linkedHashMap.get(7.5));
 
-        System.out.println(st1.hashCode());
-        System.out.println(st4.hashCode());
-
-        for(Map.Entry<Student, Double> entry : map.entrySet()) {
-            System.out.println(entry.getKey() + " : " + entry.getValue());
-        }
+        System.out.println(linkedHashMap);
     }
 }
 
-class Student{
+class Student implements Comparable<Student> {
     private String name;
     private String surname;
-    private int course;
+    int course;
 
     public Student(String name, String surname, int course) {
         this.name = name;
@@ -74,4 +69,11 @@ class Student{
     public int hashCode() {
         return Objects.hash(name, surname, course);
     }
+
+    @Override
+    public int compareTo(Student o) {
+        return this.name.compareTo(o.name);
+    }
 }
+
+
