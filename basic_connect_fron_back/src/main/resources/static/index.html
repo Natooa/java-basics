@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Finance App</title>
+</head>
+<body>
+<h2>📊 Мои транзакции</h2>
+<button id="loadBtn">Загрузить все</button>
+<ul id="list"></ul>
+
+<h3>Добавить новую</h3>
+<input id="name" placeholder="Название" />
+<input id="amount" placeholder="Сумма" type="number" />
+<button id="addBtn">Добавить</button>
+
+<script>
+    const API = "/api/transactions"; // 👈 не нужно писать localhost:8080
+
+    // Загрузить все
+    document.getElementById("loadBtn").addEventListener("click", async () => {
+        const res = await fetch(API);
+        const data = await res.json();
+
+        const list = document.getElementById("list");
+        list.innerHTML = "";
+        data.forEach(tx => {
+            const li = document.createElement("li");
+            li.textContent = `${tx.name}: ${tx.amount} ₸`;
+            list.appendChild(li);
+        });
+    });
+
+    // Добавить
+    document.getElementById("addBtn").addEventListener("click", async () => {
+        const name = document.getElementById("name").value;
+        const amount = document.getElementById("amount").value;
+
+        await fetch(API, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, amount })
+        });
+
+        alert("✅ Добавлено!");
+    });
+</script>
+</body>
+</html>
